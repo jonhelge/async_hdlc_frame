@@ -6,7 +6,7 @@
 #define MY_COMMAND 0x01
 #define CONTROL_COMMAND 0x02
 
-void test_hdlc(uint8_t command, uint8_t *payload, uint8_t payload_len)
+int test_hdlc(uint8_t command, uint8_t *payload, uint8_t payload_len)
 {
 	uint8_t hdlc_buffer[255];
 	uint8_t encoded_len = hdlc_encode(command, payload, payload_len, hdlc_buffer);
@@ -24,7 +24,7 @@ void test_hdlc(uint8_t command, uint8_t *payload, uint8_t payload_len)
 	uint8_t decoded_payload[255];
 	uint8_t decoded_payload_len;
 
-	if (hdlc_decode(hdlc_buffer, encoded_len, &decoded_command, decoded_payload, &decoded_payload_len))
+	if (hdlc_decode(hdlc_buffer, encoded_len, &decoded_command, decoded_payload, decoded_payload_len))
 	{
 		printf("Decoded successfully!\n");
 		printf("Decoded command: %02X\n", decoded_command);
@@ -34,10 +34,12 @@ void test_hdlc(uint8_t command, uint8_t *payload, uint8_t payload_len)
 			printf("%02X ", decoded_payload[i]);
 		}
 		printf("\n");
+		return 0;
 	}
 	else
 	{
 		printf("Failed to decode HDLC frame.\n");
+		return -1;
 	}
 }
 
@@ -49,11 +51,17 @@ int main()
 	uint8_t control_payload[] = {0xAA, 0xBB, 0xCC, 0xDD};
 	uint8_t control_payload_len = 4;
 
+	uint8_t err;
+
 	printf("Testing MY_COMMAND...\n");
-	test_hdlc(MY_COMMAND, my_payload, my_payload_len);
+	err = test_hdlc(MY_COMMAND, my_payload, my_payload_len);
+	if (err)
+	{
+		return err;
+	}
 
 	printf("\nTesting CONTROL_COMMAND...\n");
-	test_hdlc(CONTROL_COMMAND, control_payload, control_payload_len);
+	err = test_hdlc(CONTROL_COMMAND, control_payload, control_payload_len);
 
-	return 0;
+	return err;
 }
