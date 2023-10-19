@@ -24,7 +24,7 @@ int test_hdlc(uint8_t command, uint8_t *payload, uint8_t payload_len)
 	uint8_t decoded_payload[255];
 	uint8_t decoded_payload_len;
 
-	if (hdlc_decode(hdlc_buffer, encoded_len, &decoded_command, decoded_payload, decoded_payload_len))
+	if (hdlc_decode(hdlc_buffer, encoded_len, &decoded_command, decoded_payload, &decoded_payload_len))
 	{
 		printf("Decoded successfully!\n");
 		printf("Decoded command: %02X\n", decoded_command);
