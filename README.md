@@ -8,7 +8,7 @@ High-Level Data Link Control (HDLC) is a data link layer (Layer 2) protocol for 
 
 **Note:** This implementation provides a minimalistic and functional HDLC framing mechanism. However, it's worth noting that it does not cover the full HDLC specification
 
-**Inspiration:** This is more or less an implementation on what is outlined in this stack owerflow post: https://stackoverflow.com/a/815813
+**Inspiration:** This is more or less an implementation on what is outlined in this stackoverflow post: https://stackoverflow.com/a/815813
 
 ## Features
 
