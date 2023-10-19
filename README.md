@@ -1,3 +1,5 @@
+![C/C++ CI](https://github.com/jonhelge/async_hdlc_frame/actions/workflows/main.yml/badge.svg)
+
 # Async HDLC frame Encoder-Decoder
 
 ## Introduction
